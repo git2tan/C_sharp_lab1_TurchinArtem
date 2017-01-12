@@ -89,7 +89,7 @@ namespace C_sharp_lab1_TurchinArtem
         public static void WorkWithString()
         {
             Console.WriteLine("Вы выбрали работу со строками...\nПриступим!");
-            
+            //123
         }
     }
 }
