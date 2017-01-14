@@ -9,23 +9,27 @@ namespace C_sharp_lab1_TurchinArtem
 {
     class Program
     {
-        public enum assignment : int { arr=1, strings, regExpression, exit };
+        public enum assignment : int { arr=1, strings, regExpression, exit,other };
        
 
         static void Main(string[] args)
         {
             String[] AssigmentString = {"Массивы","Строки", "Рег.выражения" };
             Console.WriteLine("Привет! Это моя первая лаба на языке C#... Мой вариант №7");
-            //int input;
+           
             assignment input;
-            //input = (assignment)int.Parse(Console.ReadLine());
-            //Console.WriteLine("Вы ввели {0} то есть {1}",(int)input, Enum.GetName(typeof(assignment),input));
-            //input = int.Parse(Console.ReadLine());
             bool isExit = false;
             while (!isExit)
             {
                 Console.WriteLine("Введи номер задания 1(Массивы), 2(строки), 3(рег. выражения) или 4 для выхода.");
-                input = (assignment)int.Parse(Console.ReadLine());
+                try
+                {
+                    input = (assignment)int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    input = assignment.other;
+                }
                 switch (input)
                 {
 
@@ -41,6 +45,8 @@ namespace C_sharp_lab1_TurchinArtem
                         Console.WriteLine("вы ввели нето что вас просили!\n"); break;
                 }
             }
+
+
         }
 
         public static void WorkWithArray()
@@ -52,10 +58,7 @@ namespace C_sharp_lab1_TurchinArtem
             Console.WriteLine("Приступаю к заполнению массива...");
             double[,] tmpArray = new double[size, size];
             Random realRnd = new Random();
-            //foreach(double one in tmpArray)
-            //{
-
-            //}
+            
             Console.WriteLine("массив до редактирования:");
             for (int i = 0; i < size; i++)
             {
@@ -81,7 +84,7 @@ namespace C_sharp_lab1_TurchinArtem
             {
                 for (int j = 0; j < size; j++)
                 {
-                    //tmpArray[i, j] = realRnd.NextDouble();
+                    
                     Console.Write("[{0:f2}]   ", tmpArray[i, j]);
                 }
                 Console.Write("\n\n");
@@ -94,7 +97,7 @@ namespace C_sharp_lab1_TurchinArtem
             string tmpStr = Console.ReadLine();
             string resultStr="";
             string[] words;
-            //words = tmpStr.Split(' ', '!', ',', '.', '?');
+            
             words = tmpStr.Split(' ');
             foreach (string oneWord in words)
             {
@@ -129,12 +132,12 @@ namespace C_sharp_lab1_TurchinArtem
             if (tmpText.Length > 0)
             {
 
-                Regex r = new Regex(@"^(Информатика)([.])*([.?!])");
-
+                Regex r = new Regex(@"Информатика(.[^.?!])*[.?!]");
+                Console.WriteLine("Исходное предложение:\n{0}", tmpText);
                 var simpleStr = r.Matches(tmpText);
                 int count = simpleStr.Count;
                 int count1 = 0;
-                Console.WriteLine("out:");
+                Console.WriteLine("\nout:");
                 foreach (var s in simpleStr)
                 {
                     count1++;
