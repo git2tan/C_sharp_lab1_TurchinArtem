@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,9 +32,9 @@ namespace C_sharp_lab1_TurchinArtem
                     case assignment.arr:
                         WorkWithArray(); break;
                     case assignment.strings:
-                        Console.WriteLine("Вы ввели {0} то есть {1}", (int)input, Enum.GetName(typeof(assignment), input)); break;
+                        WorkWithString(); break;
                     case assignment.regExpression:
-                        Console.WriteLine("Вы ввели {0} то есть {1}", (int)input, Enum.GetName(typeof(assignment), input)); break;
+                        WorkWithRegExpression(); break;
                     case assignment.exit:
                         isExit = true; break;
                     default:
@@ -89,7 +90,58 @@ namespace C_sharp_lab1_TurchinArtem
         public static void WorkWithString()
         {
             Console.WriteLine("Вы выбрали работу со строками...\nПриступим!");
-            //123
+            Console.WriteLine("Введите строку?");
+            string tmpStr = Console.ReadLine();
+            string resultStr="";
+            string[] words;
+            //words = tmpStr.Split(' ', '!', ',', '.', '?');
+            words = tmpStr.Split(' ');
+            foreach (string oneWord in words)
+            {
+                if(oneWord.Length>0)
+                {
+                    if (resultStr.Length == 0)
+                        resultStr += oneWord;
+                    else
+                        resultStr = resultStr + " " + oneWord;
+                }
+            }
+            Console.WriteLine("Результат:");
+            Console.WriteLine(resultStr);
+        }
+
+        public static void WorkWithRegExpression()
+        {
+            Console.WriteLine("Вы выбрали работу с регулярными выражениями");
+            Console.WriteLine("Использовать строку \"по-умолчанию\"(0) или ввести самостоятельно(1)?");
+            int input = int.Parse(Console.ReadLine());
+            string tmpText="";
+            if (input == 0)
+            {
+                tmpText = "Информатика! Это информатика. Информатика это наука!. Наука об информатике! Информатика и информатика. Информатика - это информатика.";
+                Console.WriteLine(tmpText);
+            }
+            else if (input == 1)
+                tmpText = Console.ReadLine();
+            else
+                Console.WriteLine("Вы ввели неправильный номер! Try harder!!!");
+
+            if (tmpText.Length > 0)
+            {
+
+                Regex r = new Regex(@"^(Информатика)([.])*([.?!])");
+
+                var simpleStr = r.Matches(tmpText);
+                int count = simpleStr.Count;
+                int count1 = 0;
+                Console.WriteLine("out:");
+                foreach (var s in simpleStr)
+                {
+                    count1++;
+                    Console.WriteLine(s);
+                }
+                Console.WriteLine("Количество найденных совпадений = {0} или {1}",count,count1);
+            }
         }
     }
 }
