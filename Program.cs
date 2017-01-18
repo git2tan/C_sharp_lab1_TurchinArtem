@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace C_sharp_lab1_TurchinArtem
 {
     class Program
     {
         public enum assignment : int { arr=1, strings, regExpression, exit,other };
-       
-
+        
         static void Main(string[] args)
         {
             String[] AssigmentString = {"Массивы","Строки", "Рег.выражения" };
@@ -32,7 +28,6 @@ namespace C_sharp_lab1_TurchinArtem
                 }
                 switch (input)
                 {
-
                     case assignment.arr:
                         WorkWithArray(); break;
                     case assignment.strings:
@@ -42,11 +37,9 @@ namespace C_sharp_lab1_TurchinArtem
                     case assignment.exit:
                         isExit = true; break;
                     default:
-                        Console.WriteLine("вы ввели нето что вас просили!\n"); break;
+                        Console.WriteLine("вы ввели не то, что вас просили!\n"); break;
                 }
             }
-
-
         }
 
         public static void WorkWithArray()
@@ -84,7 +77,6 @@ namespace C_sharp_lab1_TurchinArtem
             {
                 for (int j = 0; j < size; j++)
                 {
-                    
                     Console.Write("[{0:f2}]   ", tmpArray[i, j]);
                 }
                 Console.Write("\n\n");
@@ -122,7 +114,7 @@ namespace C_sharp_lab1_TurchinArtem
             if (input == 0)
             {
                 tmpText = "Информатика! Это информатика. Информатика это наука!. Наука об информатике! Информатика и информатика. Информатика - это информатика.";
-                Console.WriteLine(tmpText);
+                
             }
             else if (input == 1)
                 tmpText = Console.ReadLine();
@@ -131,7 +123,6 @@ namespace C_sharp_lab1_TurchinArtem
 
             if (tmpText.Length > 0)
             {
-
                 Regex r = new Regex(@"Информатика(.[^.?!])*[.?!]");
                 Console.WriteLine("Исходное предложение:\n{0}", tmpText);
                 var simpleStr = r.Matches(tmpText);
